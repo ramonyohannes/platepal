@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/Meal.dart';
+import '../screens/category_meal_detail.dart';
 
 class CategoryMealItem extends StatelessWidget {
   final String id;
@@ -50,7 +51,12 @@ class CategoryMealItem extends StatelessWidget {
         ),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pushNamed(
+            CategoryMealDetail.categoryMealDetailRoute,
+            arguments: id,
+          );
+        },
         child: Column(
           children: [
             Stack(
