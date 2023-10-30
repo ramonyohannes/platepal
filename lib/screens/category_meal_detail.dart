@@ -92,6 +92,14 @@ class CategoryMealDetail extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.error,
+        onPressed: () {
+          Navigator.of(context).pop(categoryMealId);
+        },
+        child: const Icon(Icons.delete),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

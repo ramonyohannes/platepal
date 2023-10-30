@@ -10,9 +10,10 @@ class CategoryMealItem extends StatelessWidget {
   final double duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeCategory;
 
   CategoryMealItem(this.id, this.title, this.imageUrl, this.duration,
-      this.complexity, this.affordability)
+      this.complexity, this.affordability, this.removeCategory)
       : super(key: ValueKey(id));
 
   String get complexityText {
@@ -52,10 +53,16 @@ class CategoryMealItem extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed(
+          Navigator.of(context)
+              .pushNamed(
             CategoryMealDetail.categoryMealDetailRoute,
             arguments: id,
-          );
+          )
+              .then((value) {
+            if (value != null) {
+              removeCategory(value);
+            }
+          });
         },
         child: Column(
           children: [
