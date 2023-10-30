@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './screens/categories_list.dart';
 import './screens/category_meals.dart';
 import './screens/category_meal_detail.dart';
+import './screens/tabs_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -42,8 +42,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         primaryColor: Colors.purple,
       ),
-      home: const CategoriesList(),
       routes: {
+        "/": (context) => const TabsScreen(),
         CategoryMeals.categoryMealsRoute: (ctx) => const CategoryMeals(),
         CategoryMealDetail.categoryMealDetailRoute: (ctx) =>
             const CategoryMealDetail(),
