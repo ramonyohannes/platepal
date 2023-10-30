@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './screens/home_screen.dart';
+import 'screens/categories_list.dart';
 
 void main() => runApp(const MyApp());
 
@@ -9,9 +9,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Material App',
-      home: HomeScreen(),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            elevation: 0,
+            iconTheme: IconThemeData(color: Colors.black),
+            titleTextStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            )),
+        primarySwatch: Colors.blue,
+        primaryColor: Colors.purple,
+      ),
+      home: const CategoriesList(),
     );
   }
 }
