@@ -28,10 +28,10 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: const TextTheme(
             bodyLarge: TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              fontFamily: 'RobotoCondensed',
+              fontFamily: 'Raleway',
             ),
             titleLarge: TextStyle(
               color: Colors.black,
