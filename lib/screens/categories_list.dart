@@ -20,7 +20,7 @@ class CategoriesList extends StatelessWidget {
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
         ),
-        children: dummy_categories.map((categoryItem) {
+        children: dummyCategories.map((categoryItem) {
           return CategoriesListItem(
             categoryItem.id,
             categoryItem.title,
