@@ -5,9 +5,16 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text("Favorites"),
+        child: SizedBox(
+          width: 350,
+          child: Text(
+            textAlign: TextAlign.center,
+            "You dont have any favorites, Start adding some!",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
       ),
     );
   }
