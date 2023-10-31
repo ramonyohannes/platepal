@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../widgets/side_drawer.dart';
 
 class Filters extends StatefulWidget {
-  const Filters({super.key});
+  final Function setFilters;
+  final Map<String, Object> availableFilters;
+  const Filters(this.setFilters, this.availableFilters, {super.key});
 
   static const String filtersRoute = '/filters-route';
 
@@ -15,6 +17,16 @@ class _FiltersState extends State<Filters> {
   bool isVegan = false;
   bool isVegetarian = false;
   bool isLactoseFree = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    isGlutenFree = widget.availableFilters['isGlutenFree'] as bool;
+    isLactoseFree = widget.availableFilters['isLactoseFree'] as bool;
+    isVegan = widget.availableFilters['isVegan'] as bool;
+    isVegetarian = widget.availableFilters['isVegetarian'] as bool;
+  }
 
   Widget buildSwitchListTile(
     String title,
@@ -35,6 +47,20 @@ class _FiltersState extends State<Filters> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Filters"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              final selectedFilters = {
+                'isGlutenFree': isGlutenFree,
+                'isVegan': isVegan,
+                'isVegetarian': isVegetarian,
+                'isLactoseFree': isLactoseFree,
+              };
+              widget.setFilters(selectedFilters);
+            },
+            icon: const Icon(Icons.save),
+          ),
+        ],
       ),
       drawer: const SideDrawer(),
       body: Column(

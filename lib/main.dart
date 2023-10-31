@@ -1,14 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:platepal_app/models/meal.dart';
 
 import './screens/category_meals.dart';
 import './screens/category_meal_detail.dart';
 import './screens/tabs_screen.dart';
 import './screens/filters_screen.dart';
 
+import './dummy_data.dart';
+
 void main() => runApp(const MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Map<String, Object> _availableFilters = {
+    'isGlutenFree': false,
+    'isVegan': false,
+    'isVegetarian': false,
+    'isLactoseFree': false,
+  };
+
+  List<Meal> _availableMeals = dummyMeals;
+
+  void setFilters(Map<String, Object> filters) {
+    setState(() {
+      _availableFilters = filters;
+
+      _availableMeals = dummyMeals.where((meal) {
+        if (_availableFilters['isGlutenFree'] as bool && !meal.isGlutenFree) {
+          return false;
+        }
+        if (_availableFilters['isVegan'] as bool && !meal.isVegan) {
+          return false;
+        }
+        if (_availableFilters['isVegetarian'] as bool && !meal.isVegetarian) {
+          return false;
+        }
+        if (_availableFilters['isLactoseFree'] as bool && !meal.isLactoseFree) {
+          return false;
+        }
+        return true;
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +84,11 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/": (context) => const TabsScreen(),
-        CategoryMeals.categoryMealsRoute: (ctx) => const CategoryMeals(),
+        CategoryMeals.categoryMealsRoute: (ctx) =>
+            CategoryMeals(_availableMeals),
         CategoryMealDetail.categoryMealDetailRoute: (ctx) =>
             const CategoryMealDetail(),
-        Filters.filtersRoute: (ctx) => const Filters(),
+        Filters.filtersRoute: (ctx) => Filters(setFilters, _availableFilters),
       },
     );
   }
